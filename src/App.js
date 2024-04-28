@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./Store/store";
+import SearchComponent from "./Component/SearchComponent";
+import SearchResultsComponent from "./Component/SearchResultsComponent";
+import MovieDetailComponent from "./Component/MovieDetailComponent";
+import "./App.css";
+import Navbar from "./Component/Navbar";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <>
+                <SearchComponent />
+                <SearchResultsComponent />
+              </>
+            }
+          />
+          <Route
+            path="/movie/:imdbID"
+            element={<MovieDetailComponent />}
+            // render={({ match }) => (
+            //   <MovieDetailComponent imdbID={match.params.imdbID} />
+            // )}
+          />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   );
-}
+};
 
 export default App;

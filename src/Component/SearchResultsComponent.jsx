@@ -1,0 +1,77 @@
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Pagination from "./Pagination";
+import Loader from "./Loader";
+
+const SearchResultsComponent = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [moviesPerPage] = useState(8); // Initial show 8 data per page
+  const searchResults = useSelector((state) => state.searchResults);
+  const loader = useSelector(state => state.loading);
+  const history = useNavigate();
+
+  // Get current movies
+  const indexOfLastMovie = currentPage * moviesPerPage;
+  const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
+  const currentMovies = searchResults.slice(
+    indexOfFirstMovie,
+    indexOfLastMovie
+  );
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Redirect to movie detail page
+  const handleMovieClick = (imdbID) => {
+    history(`/movie/${imdbID}`);
+  };
+
+  console.log(loader,"loader")
+
+  return (
+    <div>
+      {loader && <Loader />}
+      <div class="card-container">
+        {currentMovies.map((movie) => (
+          <div
+            class="card"
+            key={movie.imdbID}
+            onClick={() => handleMovieClick(movie.imdbID)}
+          >
+            <div class="card-image">
+              <img src={movie.Poster} alt={movie.Title} />
+            </div>
+            <div class="card-content">
+              <h3>
+                {movie.Title} ({movie.Year})
+              </h3>
+            </div>
+          </div>
+        ))}
+      </div>
+      {/* Pagination */}
+      <Pagination
+        moviesPerPage={moviesPerPage}
+        totalMovies={searchResults.length}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
+      {/* <div>
+        {searchResults.length > moviesPerPage && (
+          <ul>
+            {Array.from({
+              length: Math.ceil(searchResults.length / moviesPerPage),
+            }).map((_, index) => (
+              <li key={index}>
+                <button onClick={() => paginate(index + 1)}>{index + 1}</button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div> */}
+    </div>
+  );
+};
+
+export default SearchResultsComponent;

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getMovieDetails } from "./Api/api"; // Assuming you have implemented API functions
+import { getMovieDetails } from "./Api/api";
 import { useParams } from "react-router-dom";
 import Loader from "./Loader";
 
@@ -9,9 +9,6 @@ const MovieDetailComponent = () => {
   const { imdbID } = useParams();
   const movie = useSelector((state) => state.selectedMovie);
   const loader = useSelector(state => state.loading);
-
-
-  console.log(movie, "params");
 
   useEffect(() => {
     dispatch({ type: "SET_LOADING", payload: true });

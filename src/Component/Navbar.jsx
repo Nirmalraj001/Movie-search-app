@@ -5,9 +5,9 @@ const Navbar = () => {
     const navigate = useNavigate()
   return (
     <nav className="navbar">
-      <div className="navbar-title" onClick={() => navigate('/')}>Movie Search App</div>
+      <div className="navbar-title" onClick={() => navigate('/Movie-search-app')}>Movie Search App</div>
       <a
-        href="https://github.com/your-github-repo"
+        href="https://github.com/Nirmalraj001/Movie-search-app"
         target="_blank"
         rel="noopener noreferrer"
         className="github-link"

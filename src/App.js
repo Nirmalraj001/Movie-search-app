@@ -16,7 +16,7 @@ const App = () => {
         <Routes>
           <Route
             exact
-            path="/"
+            path="/Movie-search-app"
             element={
               <>
                 <SearchComponent />

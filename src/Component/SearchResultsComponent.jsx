@@ -6,7 +6,7 @@ import Loader from "./Loader";
 
 const SearchResultsComponent = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [moviesPerPage] = useState(8); // Initial show 8 data per page
+  const [moviesPerPage] = useState(8);
   const searchResults = useSelector((state) => state.searchResults);
   const loader = useSelector(state => state.loading);
   const history = useNavigate();
@@ -22,12 +22,9 @@ const SearchResultsComponent = () => {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  // Redirect to movie detail page
   const handleMovieClick = (imdbID) => {
     history(`/movie/${imdbID}`);
   };
-
-  console.log(loader,"loader")
 
   return (
     <div>

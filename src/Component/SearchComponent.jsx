@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { searchMovies } from "./Api/api"; // Assuming you have implemented API functions
+import { searchMovies } from "./Api/api";
 import Loader from "./Loader";
 
 const SearchComponent = () => {
@@ -12,6 +12,7 @@ const SearchComponent = () => {
 
   const dispatch = useDispatch();
 
+  // Search movies
   const handleSearch = async () => {
     dispatch({ type: 'SET_LOADING', payload: true });
     const results = await searchMovies(query);
@@ -19,7 +20,7 @@ const SearchComponent = () => {
     dispatch({ type: 'SET_LOADING', payload: false });
   };
 
-  // Sorting movies
+  // Sort movies
   const sortMovies = (e) => {
     setSortBy(e.target.value);
     const sortedMovies = [...searchResults].sort((a, b) => {

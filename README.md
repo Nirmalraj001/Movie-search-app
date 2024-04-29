@@ -28,7 +28,6 @@ This is a Movie Search web application built using React.js. It allows users to 
 
 ```bash
 git clone https://github.com/Nirmalraj001/Movie-search-app.
-
-
-
-
+cd movie-search-app
+npm install
+npm start

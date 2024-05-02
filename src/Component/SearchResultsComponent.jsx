@@ -9,7 +9,7 @@ const SearchResultsComponent = () => {
   const [moviesPerPage] = useState(8);
   const searchResults = useSelector((state) => state.searchResults);
   const loader = useSelector(state => state.loading);
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   // Get current movies
   const indexOfLastMovie = currentPage * moviesPerPage;
@@ -23,7 +23,7 @@ const SearchResultsComponent = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleMovieClick = (imdbID) => {
-    history(`/movie/${imdbID}`);
+    navigate(`/movie/${imdbID}`);
   };
 
   return (

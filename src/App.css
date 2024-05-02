@@ -13,10 +13,6 @@ body{
   --color-highlight-secondary: #b7f9e9;
   --border-radius-primary: 32px;
 }
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 @media (min-width: 576px) {
   :root {
     --font-size-title: 40px;
@@ -72,7 +68,7 @@ body{
 
 .card-image {
   position: relative;
-  padding-top: 100%; /* Set the aspect ratio for the image */
+  padding-top: 100%; 
   overflow: hidden;
 }
 

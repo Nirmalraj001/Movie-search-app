@@ -18,6 +18,7 @@ const SearchComponent = () => {
     const results = await searchMovies(query);
     dispatch({ type: "SET_SEARCH_RESULTS", payload: results });
     dispatch({ type: 'SET_LOADING', payload: false });
+    setQuery('')
   };
 
   // Sort movies
@@ -47,7 +48,7 @@ const SearchComponent = () => {
         Search
       </button>
 
-      {searchResults.length !== 0 && (
+      {searchResults && searchResults?.length !== 0 && (
         <select class="custom-select" value={sortBy} onChange={sortMovies}>
           <option value="Title">Title</option>
           <option value="Year">Year</option>

@@ -8,13 +8,15 @@ const SearchResultsComponent = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [moviesPerPage] = useState(8);
   const searchResults = useSelector((state) => state.searchResults);
-  const loader = useSelector(state => state.loading);
+  const loader = useSelector((state) => state.loading);
   const navigate = useNavigate();
+
+  console.log(searchResults, "searchResults");
 
   // Get current movies
   const indexOfLastMovie = currentPage * moviesPerPage;
   const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
-  const currentMovies = searchResults.slice(
+  const currentMovies = searchResults?.slice(
     indexOfFirstMovie,
     indexOfLastMovie
   );
@@ -29,28 +31,34 @@ const SearchResultsComponent = () => {
   return (
     <div>
       {loader && <Loader />}
-      <div class="card-container">
-        {currentMovies.map((movie) => (
-          <div
-            class="card"
-            key={movie.imdbID}
-            onClick={() => handleMovieClick(movie.imdbID)}
-          >
-            <div class="card-image">
-              <img src={movie.Poster} alt={movie.Title} />
+      {searchResults ? (
+        <div class="card-container">
+          {currentMovies.map((movie) => (
+            <div
+              class="card"
+              key={movie.imdbID}
+              onClick={() => handleMovieClick(movie.imdbID)}
+            >
+              <div class="card-image">
+                <img src={movie.Poster} alt={movie.Title} />
+              </div>
+              <div class="card-content">
+                <h3>
+                  {movie.Title} ({movie.Year})
+                </h3>
+              </div>
             </div>
-            <div class="card-content">
-              <h3>
-                {movie.Title} ({movie.Year})
-              </h3>
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div class="noMovieFound">
+          <h1>No Movie Found</h1>
+        </div>
+      )}
       {/* Pagination */}
       <Pagination
         moviesPerPage={moviesPerPage}
-        totalMovies={searchResults.length}
+        totalMovies={searchResults?.length}
         paginate={paginate}
         currentPage={currentPage}
       />

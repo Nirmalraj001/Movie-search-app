@@ -54,19 +54,6 @@ const SearchResultsComponent = () => {
         paginate={paginate}
         currentPage={currentPage}
       />
-      {/* <div>
-        {searchResults.length > moviesPerPage && (
-          <ul>
-            {Array.from({
-              length: Math.ceil(searchResults.length / moviesPerPage),
-            }).map((_, index) => (
-              <li key={index}>
-                <button onClick={() => paginate(index + 1)}>{index + 1}</button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div> */}
     </div>
   );
 };
